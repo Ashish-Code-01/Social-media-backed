@@ -45,4 +45,10 @@ router.route("/forgot/password").post(forgotPassword);
 
 router.route("/password/reset/:token").put(resetPassword);
 
+// first route to cheak it
+
+router.get("/", (req, res) => {
+  res.send("API is running!");
+});
+
 module.exports = router;
