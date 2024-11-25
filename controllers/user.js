@@ -94,18 +94,24 @@ exports.logout = async (req, res) => {
   try {
     res
       .status(200)
-      .cookie("token", null, { expires: new Date(Date.now()), httpOnly: true })
+      .cookie("token", null, {
+        expires: new Date(0),
+        httpOnly: true,
+        secure: true,
+        sameSite: "strict",
+      })
       .json({
         success: true,
-        message: "Logged out",
+        message: "Logged out successfully",
       });
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: error.message,
+      message: "Logout failed. Please try again.",
     });
   }
 };
+
 
 exports.followUser = async (req, res) => {
   try {
