@@ -94,11 +94,11 @@ exports.logout = async (req, res) => {
   try {
     res
       .status(200)
-      .cookie("token", null, {
-        expires: new Date(0),
-        httpOnly: true,
-        secure: true,
-        sameSite: "strict",
+      .cookie("token", "", {
+        expires: new Date(0), 
+        httpOnly: true, 
+        secure: process.env.NODE_ENV === "production", 
+        sameSite: "strict", 
       })
       .json({
         success: true,
@@ -107,10 +107,11 @@ exports.logout = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       success: false,
-      message: "Logout failed. Please try again.",
+      message: error.message || "Logout failed. Please try again.",
     });
   }
 };
+
 
 
 exports.followUser = async (req, res) => {
