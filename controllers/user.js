@@ -94,7 +94,7 @@ exports.logout = async (req, res) => {
   try {
     res
       .status(200)
-      .cookie("token", "", {
+      .cookie("token", null, {
         expires: new Date(0), 
         httpOnly: true, 
         secure: process.env.NODE_ENV === "production", 
